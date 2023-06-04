@@ -1,5 +1,5 @@
 
-import { join as joinPaths } from 'path';
+const joinPaths = require('path').join;
 
 /**
  * Returns an object containing the size of the folder and a list of errors encountered while traversing the folder.
@@ -14,7 +14,7 @@ import { join as joinPaths } from 'path';
  * 
  * @returns {Promise<{size: number | bigint, errors: Array<Error> | null}>} - An object containing the size of the folder in bytes and a list of encountered errors.
  */
-export default async function getFolderSize (itemPath, options) { return await core(itemPath, options, {errors: true}); }
+function getFolderSize (itemPath, options) { return core(itemPath, options, {errors: true}); }
 
 /**
  * Returns the size of the folder. If any errors are encountered while traversing the folder, they are silently ignored.
@@ -49,7 +49,7 @@ getFolderSize.strict = async (itemPath, options) => await core(itemPath, options
 
 
 async function core (rootItemPath, options = {}, returnType = {}) {
-  const fs = options.fs || await import('fs/promises');
+  const fs = options.fs || require('fs').promises;
   
   const fileSizes = new Map();
   const errors = [];
@@ -98,3 +98,6 @@ async function core (rootItemPath, options = {}, returnType = {}) {
   }
 
 }
+
+
+module.exports = getFolderSize;
