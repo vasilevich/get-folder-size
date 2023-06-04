@@ -2,7 +2,7 @@
   "name": "get-folder-size",
   "version": "4.0.0",
   "description": "Get the size of a folder by iterating through its sub-files and -folders.",
-  "type": "module",
+  "type": "commonjs",
   "main": "./index.js",
   "exports": "./index.js",
   "bin": {
